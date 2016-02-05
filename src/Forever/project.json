@@ -1,0 +1,24 @@
+﻿{
+  "version": "1.0.0-*",
+  "description": "Forever Console Application",
+  "authors": [ "andy" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+
+  "compilationOptions": {
+    "emitEntryPoint": true
+  },
+
+  "dependencies": {
+  },
+
+  "commands": {
+    "Forever": "Forever"
+  },
+
+  "frameworks": {
+    "dnx451": { }
+    
+  }
+}
