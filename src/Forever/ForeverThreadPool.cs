@@ -21,6 +21,7 @@ namespace Forever
             Start();
         }
 
+        //TODO: QueueUserWorkItem could return false, effectively stopping the loop
         private void Start() => ThreadPool.QueueUserWorkItem(_callback);
 
         private void ThreadStart(object state)
