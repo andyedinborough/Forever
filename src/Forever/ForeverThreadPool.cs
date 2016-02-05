@@ -18,11 +18,10 @@ namespace Forever
             _minWaitBetweenCalls = minWaitBetweenCalls;
             _mre = new ManualResetEventSlim(false);
             _callback = new WaitCallback(ThreadStart);
-            Start();
+            ThreadStart(null);
         }
 
-        //TODO: QueueUserWorkItem could return false, effectively stopping the loop
-        private void Start() => ThreadPool.QueueUserWorkItem(_callback);
+        private bool Start() => ThreadPool.QueueUserWorkItem(_callback);
 
         private void ThreadStart(object state)
         {
@@ -34,8 +33,11 @@ namespace Forever
             {
                 _onError?.Invoke(ex);
             }
-            _mre.Wait(_minWaitBetweenCalls);
-            Start();
+
+            do
+            {
+                _mre.Wait(_minWaitBetweenCalls);
+            } while (!Start());
         }
     }
 }
